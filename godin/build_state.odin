@@ -79,7 +79,7 @@ parse_godin_comment_class :: proc(scanner: ^scan.Scanner) -> (comment_class: God
             scanner,
             "Expected a class name identifier in class declaration, got '%v' (%v) instead.",
             comment_class.name,
-            scan.token_string(tok),
+            scan.token_string(tok, context.allocator),
         )
         return
     }
@@ -93,7 +93,7 @@ parse_godin_comment_class :: proc(scanner: ^scan.Scanner) -> (comment_class: God
             scanner,
             "Expected an Ident, 'extends' in class declaration. Got '%v' (%v) instead.",
             extends,
-            scan.token_string(tok),
+            scan.token_string(tok, context.allocator),
         )
         return
     }
@@ -106,7 +106,7 @@ parse_godin_comment_class :: proc(scanner: ^scan.Scanner) -> (comment_class: God
             scanner,
             "Expected a class name identifier in class 'extends' declaration, got '%v' (%v) instead.",
             comment_class.extends,
-            scan.token_string(tok),
+            scan.token_string(tok, context.allocator),
         )
         return
     }
@@ -255,7 +255,7 @@ build_state :: proc(state: ^State, options: BuildOptions) {
         }
     }
 
-    for _, class in &state.classes {
+    for _, &class in &state.classes {
         class.out_file = strings.trim_suffix(class.source.file.fullpath, ".odin")
         class.out_file = strings.concatenate([]string{class.out_file, options.backend_suffix})
     }
