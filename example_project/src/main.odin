@@ -12,7 +12,7 @@ import "core:strings"
 // TODO: add property get+set gen
 // TODO: add enum gen
 
-//+class ExampleClass extends Sprite2D
+#+class ExampleClass extends Sprite2D
 ExampleClass :: struct {
     _owner: gd.ObjectPtr,
     thing:  i64,

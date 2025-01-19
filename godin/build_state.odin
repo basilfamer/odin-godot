@@ -9,7 +9,7 @@ import "core:odin/ast"
 import "core:odin/parser"
 import "core:odin/tokenizer"
 
-GODIN_COMMENT_PREFIX :: "//+"
+GODIN_COMMENT_PREFIX :: "#+"
 DEFAULT_BASE_CLASS :: "Node"
 
 State :: struct {
@@ -211,7 +211,7 @@ build_state :: proc(state: ^State, options: BuildOptions) {
                     continue
                 }
 
-                // eat the //+ at the beginning of the declaration
+                // eat the #+ at the beginning of the declaration
                 godin_comment_text = line[3:]
 
                 godin_comment, ok := parse_godin_comment(godin_comment_text, file_info.fullpath)
