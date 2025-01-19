@@ -11,7 +11,7 @@ be generated.
 To declare an Extension Class to be registered with Godot's ClassDB, use the class
 declaration:
 
-    //+class Player extends Node2D
+    #+class Player extends Node2D
     Player :: struct {
         health: i64,
     }
@@ -27,28 +27,28 @@ the output bindings will be in `player.gen.odin`.
 
 To declare an instance method for an extension class, use the method declaration:
 
-    //+method(Player) kill()
+    #+method(Player) kill()
     player_kill :: proc(self: ^Player) {
         self.health = 0
     }
 
 Methods can have arguments, whose type arguments must be godot types:
 
-    //+method(Player) damage(amount: int)
+    #+method(Player) damage(amount: int)
     player_damage :: proc(self: ^Player, amount: i64) {
         self.health -= amount
     }
 
 Methods can have return values:
 
-    //+method(Player) heal(self: ^Player, amount: int) -> int
+    #+method(Player) heal(self: ^Player, amount: int) -> int
     player_heal :: proc(self: ^Player, amount: i64) {
         return self.health += amount
     }
 
 You can declare a static method by prepending `static` to a method declaration:
 
-    //+static method(Player) do_thing(a: int, b: int) -> int
+    #+static method(Player) do_thing(a: int, b: int) -> int
     player_do_thing :: proc(a, b: i64) -> i64 {
         return a + b
     }
@@ -57,7 +57,7 @@ You can declare a static method by prepending `static` to a method declaration:
 
 You may override the default behaviour of some pre-defined methods by name:
 
-    //+method(Player) _set(property: StringName, value: Variant) -> bool
+    #+method(Player) _set(property: StringName, value: Variant) -> bool
     player_set :: proc(self: ^Player, property: var.StringName, value: var.Variant) -> bool {
         // check property name and field value on self
         // return true if property found & set, false otherwise
@@ -83,14 +83,14 @@ You may also override `_destroy`, which will be called when the object is freed.
 
 To declare a class property getter, use the property-get declaration:
 
-    //+property(Player) health get: int
+    #+property(Player) health get: int
     player_get_health :: proc(self: ^Player) -> i64 {
         return self.health
     }
 
 Setters use similar syntax:
 
-    //+property(Player) health set: int
+    #+property(Player) health set: int
     player_set_health :: proc(self: ^Player, value: i64) {
         self.health = value
     }
@@ -99,17 +99,17 @@ Setters use similar syntax:
 
 To declare a class signal, use the signal declaration:
 
-    //+class Player extends Node2D
+    #+class Player extends Node2D
     Player :: struct {
         // ...
 
-        //+signal on_kill(last_damage: int)
+        #+signal on_kill(last_damage: int)
         killed: Signal,
     }
 
 You can emit the signal directly, for example:
 
-    //+method(Player) damage(amount: int)
+    #+method(Player) damage(amount: int)
     player_damage :: proc(self: ^Player, amount: i64) {
         self.health -= amount
         if self.health <= 0 {
@@ -121,7 +121,7 @@ You can emit the signal directly, for example:
 
 To declare an enum, use the enum declaration:
 
-    //+enum(Player) PlayerState
+    #+enum(Player) PlayerState
     PlayerState :: enum {
         Alive,
         Dead,

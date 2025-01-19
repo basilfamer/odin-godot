@@ -84,7 +84,7 @@ For example, the following Odin code will produce all of the boilerplate for an 
 ```odin
 package test
 
-//+class Player extends Node2D
+#+class Player extends Node2D
 Player :: struct {
     health: i64,
 }
